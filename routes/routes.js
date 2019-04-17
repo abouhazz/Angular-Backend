@@ -1,6 +1,6 @@
 const UserController = require('../contollers/user_controller')
 const DeveloperController = require('../contollers/developer_controller')
-const GameController = require('../contollers/game_controller')
+const GameController = require('../contollers/game_contoller')
 const token = require('../middleware/auth_token')
 
 module.exports = (app)=>{
