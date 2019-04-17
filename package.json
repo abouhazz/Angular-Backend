@@ -1,0 +1,22 @@
+{
+  "name": "angular-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abouhazz/Angular-Backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abouhazz/Angular-Backend/issues"
+  },
+  "homepage": "https://github.com/abouhazz/Angular-Backend#readme",
+  "dependencies": {
+    "nodemon": "^1.18.11"
+  }
+}
