@@ -2,7 +2,7 @@ const Game = require('../models/game')
 
 module.exports = {
     createGame(req, res, next){
-        const games = new Game({name: req.body.name, description:req.body.description, platform:req.body.platform})
+        const games = new Game({name: req.body.name, description:req.body.description, releasedate: req.body.releasedate, platform:req.body.platform})
         Game.create(games)
         .then(game => res.send(game))
         .catch(next);
@@ -27,7 +27,7 @@ module.exports = {
 
     editGame(req, res, next){
         Game.findByIdAndUpdate({_id: req.params.gameid},
-            {name: req.body.name, description :req.body.description, platform: req.body.platform})
+            {name: req.body.name, description :req.body.description,releasedate: req.body.releasedate, platform: req.body.platform})
         .then(game => {
             if(game === null){
                 res.status(404).send({Error: 'game does not exist'});

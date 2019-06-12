@@ -6,6 +6,7 @@ const GameSchema = new Schema({
     name: { type: String, required: true},
     description: { type: String, required: true },
     platform: { type: String, required: true },
+    releasedate: {type: Date, required: true},
     developers: [DeveloperSchema]
 });
 
