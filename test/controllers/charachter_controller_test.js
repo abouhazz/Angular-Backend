@@ -7,13 +7,13 @@ const Game = mongoose.model('game');
 
 describe('Charachter controller', () => {
     it('POST to api/charachters creates a charachter', done => {
-        const game = new Game({ name: 'testGame', description: 'testDescription', platform: 'PS4',releasedate: "2015-03-25",});
+        const game = new Game({ name: 'testGame', description: 'testDescription', platform: 'PS4',releasedate: "2015-03-25"});
     
         Promise.all([game.save()])
             .then(() => {
                 request(app)
                     .post('/api/games/' + game._id + '/charachters')
-                    .send({name: 'Trevor', level: 20})
+                    .send({name: 'PIETER', level: 20})
                     .end((err, response) => {
                         assert(response.status === 200);
                         done();
@@ -72,7 +72,7 @@ describe('Charachter controller', () => {
         Promise.all([game.save()])
         .then(() => {
             request(app)
-            .delete('/api/games/' + game._id + '/charachter/' + game.charachters[0]._id)
+            .delete('/api/games/' + game._id + '/charachters/' + game.charachters[0]._id)
             .end((err, response) => {
                 assert(response.status === 200);
                 done();

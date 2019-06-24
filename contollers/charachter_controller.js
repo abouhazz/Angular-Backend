@@ -15,7 +15,7 @@ module.exports = {
                     return game.save();
                 }
             })
-            .then(()=> res.status(200).send(developer))
+            .then(()=> res.status(200).send(charachter))
             .catch(next);
         },
 
