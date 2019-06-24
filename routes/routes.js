@@ -1,6 +1,7 @@
 const UserController = require('../contollers/user_controller')
 const DeveloperController = require('../contollers/developer_controller')
 const GameController = require('../contollers/game_contoller')
+const CharachterController = require('../contollers/charachter_controller')
 const token = require('../middleware/auth_token')
 
 module.exports = (app)=>{
@@ -22,6 +23,12 @@ module.exports = (app)=>{
     app.get('/api/games/:gameid/developers/:developerid', token, DeveloperController.getDeveloperById)
     app.put('/api/games/:gameid/developers/:developerid', token, DeveloperController.editDeveloper)
     app.delete('/api/games/:gameid/developers/:developerid', token, DeveloperController.deleteDeveloper)
+
+    app.post('/api/games/:gameid/charachters', token, CharachterController.createCharachter)
+    app.get('/api/games/:gameid/charachters', token,CharachterController.getAllCharachters)
+    app.get('/api/games/:gameid/charachters/:charachterid', token, CharachterController.getCharachterById)
+    app.put('/api/games/:gameid/charachters/:charachterid', token, CharachterController.editCharachter)
+    app.delete('/api/games/:gameid/charachters/:charachterid', token, CharachterController.deleteCharachter)
     }
 
     else{
@@ -41,5 +48,10 @@ module.exports = (app)=>{
     app.put('/api/games/:gameid/developers/:developerid',  DeveloperController.editDeveloper)
     app.delete('/api/games/:gameid/developers/:developerid',  DeveloperController.deleteDeveloper)
 
+    app.post('/api/games/:gameid/charachters',CharachterController.createCharachter)
+    app.get('/api/games/:gameid/charachters', CharachterController.getAllCharachters)
+    app.get('/api/games/:gameid/charachters/:charachterid', CharachterController.getCharachterById)
+    app.put('/api/games/:gameid/charachters/:charachterid', CharachterController.editCharachter)
+    app.delete('/api/games/:gameid/charachters/:charachterid', CharachterController.deleteCharachter)
     }
 }

@@ -7,7 +7,7 @@ const Game = mongoose.model('game');
 
 describe('Developer controller', () => {
     it('POST to api/developers creates a developer', done => {
-        const game = new Game({ name: 'testGame', description: 'testDescription', platform: 'PS4'});
+        const game = new Game({ name: 'testGame', description: 'testDescription', platform: 'PS4',releasedate: "2015-03-25" ,});
     
         Promise.all([game.save()])
             .then(() => {
@@ -22,7 +22,7 @@ describe('Developer controller', () => {
             });
 
     it('GET to api/developers retrieves all developer', done => {
-        const game = new Game({ name: 'testGame', description: 'testDescription', platform: 'PS4', developers: [{ name: 'Rockstar' }, { name: 'EA' }]});
+        const game = new Game({ name: 'testGame', description: 'testDescription', platform: 'PS4',releasedate: "2015-03-25" , developers: [{ name: 'Rockstar' }, { name: 'EA' }]});
             
         Promise.all([game.save()])
             .then(() => {
@@ -36,7 +36,7 @@ describe('Developer controller', () => {
             });
 
     it('GET to api/developers retrieves a specific developer', done => {
-        const game = new Game({ name: 'testGame', description: 'testDescription', platform: 'PS4', developers: [{ name: 'Rockstar' }, { name: 'EA' }]});
+        const game = new Game({ name: 'testGame', description: 'testDescription',  platform: 'PS4', releasedate: "2015-03-25" ,developers: [{ name: 'Rockstar' }, { name: 'EA' }]});
                     
         Promise.all([game.save()])
                     .then(() => {
@@ -49,7 +49,7 @@ describe('Developer controller', () => {
                         });
                     });
     it('PUT to api/developers edits a developer', done => {
-        const game = new Game({ name: 'testGame', description: 'testDescription', platform: 'PS4', developers: [{ name: 'Rockstar' }, { name: 'EA' }]});
+        const game = new Game({ name: 'testGame', description: 'testDescription'  , platform: 'PS4',releasedate: "2015-03-25" , developers: [{ name: 'Rockstar' }, { name: 'EA' }]});
                             
         Promise.all([game.save()])
         .then(() => {
@@ -67,7 +67,7 @@ describe('Developer controller', () => {
     });
 
     it('DELETE to api/developers deletes a developer', done => {
-        const game = new Game({ name: 'testGame', description: 'testDescription', platform: 'PS4', developers: [{ name: 'Rockstar' }, { name: 'EA' }]});
+        const game = new Game({ name: 'testGame', description: 'testDescription', platform: 'PS4',releasedate: "2015-03-25" , developers: [{ name: 'Rockstar' }, { name: 'EA' }]});
                             
         Promise.all([game.save()])
         .then(() => {
