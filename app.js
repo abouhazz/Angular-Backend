@@ -11,7 +11,7 @@ mongoose.set('useCreateIndex', true);
 mongoose.set('useFindAndModify', false);
 
 if (process.env.NODE_ENV !== 'test') {
-    mongoose.connect('mongodb+srv://a_elbouhazzaoui:@Welkom001@cluster0-urdq2.mongodb.net/test?retryWrites=true', { useNewUrlParser: true });
+    mongoose.connect('mongodb+srv://a_elbouhazzaoui:@Welkom001@cluster0-urdq2.mongodb.net/game?retryWrites=true', { useNewUrlParser: true });
     
 }
 
