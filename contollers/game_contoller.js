@@ -1,8 +1,9 @@
 const Game = require('../models/game')
+const User = require('../models/user')
 
 module.exports = {
     createGame(req, res, next){
-        const games = new Game({name: req.body.name, description:req.body.description, releasedate: req.body.releasedate, platform:req.body.platform})
+        const games = new Game({name: req.body.name, description:req.body.description, releasedate: req.body.releasedate, platform:req.body.platform, user: req.userData.userId})
         Game.create(games)
         .then(game => res.send(game))
         .catch(next);
@@ -26,23 +27,24 @@ module.exports = {
     },
 
     editGame(req, res, next){
-        Game.findByIdAndUpdate({_id: req.params.gameid},
-            {name: req.body.name, description :req.body.description,releasedate: req.body.releasedate, platform: req.body.platform})
+        Game.findOne({_id: req.params.gameid,user: req.userData.userId})
         .then(game => {
+            game.name= req.body.name, game.description =req.body.description,game.releasedate= req.body.releasedate, game.platform= req.body.platform
             if(game === null){
-                res.status(404).send({Error: 'game does not exist'});
+                res.status(404).send({Error: 'game does not exist or the user is non-autherized'});
             }
             else{
+                game.save()
                 res.send(game);
             }
         }).catch(next);
     },
 
     deleteGame(req, res, next){
-        Game.findByIdAndDelete({_id: req.params.gameid})
+        Game.findOne({_id: req.params.gameid,user: req.userData.userId})
         .then(game => {
             if(game === null){
-                res.status(404).send({Error: 'game does not exist'});
+                res.status(404).send({Error: 'game does not exist or the user is non-autherized'});
             }
             else{
                 res.status(200).send({message: 'game is deleted' })
