@@ -57,7 +57,7 @@ module.exports = {
 
     deleteCharachter(req, res, next){
         Game.findByIdAndUpdate({_id: req.params.gameid},
-            {$pull: {developers: {_id: req.params.developerid}}}
+            {$pull: {charachters: {_id: req.params.charachterid}}}
             )
         .then(game => {
             if(game === null){
