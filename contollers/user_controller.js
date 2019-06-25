@@ -7,7 +7,7 @@ module.exports = {
         .then((user)=> {
             if (user.isValid(req.body.password)){
                 try{
-                    let token = jwt.sign({email: user.email, userId: user._id }, 'secret', {expiresIn: '1d'})
+                    let token = jwt.sign({email: user.email}, 'secret', {expiresIn: '1d'})
                     return res.status(200).json(token);
                 }
                 catch(error){

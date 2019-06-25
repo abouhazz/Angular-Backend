@@ -4,7 +4,7 @@ module.exports = {
     createCharachter(req, res, next){
         const charachter  = req.body;
 
-        Game.findOne({_id: req.params.gameid, user: req.userData.userId})
+        Game.findById({_id: req.params.gameid})
         .then(game => {
             if(game === null){
                 res.status(404).send({error: 'game does not exist'});
@@ -43,7 +43,7 @@ module.exports = {
     },
 
     editCharachter(req, res, next){
-        Game.updateOne({_id: req.params.gameid, "charachters._id": req.params.charachterid, user: req.userData.userId},
+        Game.updateOne({_id: req.params.gameid, "charachters._id": req.params.charachterid},
             {$set: {"charachters.$.name": req.body.name, "charachters.$.level": req.body.level }})
         .then(game => {
             if(game === null){
@@ -56,7 +56,7 @@ module.exports = {
     },
 
     deleteCharachter(req, res, next){
-        Game.updateOne({_id: req.params.gameid, user: req.userData.userId},
+        Game.findByIdAndUpdate({_id: req.params.gameid},
             {$pull: {charachters: {_id: req.params.charachterid}}}
             )
         .then(game => {

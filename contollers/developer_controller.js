@@ -4,7 +4,7 @@ module.exports = {
     createDeveloper(req, res, next){
         const developer  = req.body;
 
-        Game.findOne({_id: req.params.gameid, user: req.userData.userId})
+        Game.findById({_id: req.params.gameid})
         .then(game => {
             if(game === null){
                 res.status(404).send({error: 'game does not exist'});
@@ -43,31 +43,27 @@ module.exports = {
     },
 
     editDeveloper(req, res, next){
-        Game.updateOne({_id: req.params.gameid, "developers._id": req.params.developerid, user: req.userData.userId},
+        Game.updateOne({_id: req.params.gameid, "developers._id": req.params.developerid},
             {$set: {"developers.$.name": req.body.name}})
         .then(game => {
-            
             if(game === null){
                 res.status(404).send({Error: 'game does not exist'});
             }
-            
             else{
-                
                 res.send(game);
             }
         }).catch(next);
     },
 
     deleteDeveloper(req, res, next){
-        Game.updateOne({_id: req.params.gameid, user: req.userData.userId},
+        Game.findByIdAndUpdate({_id: req.params.gameid},
             {$pull: {developers: {_id: req.params.developerid}}}
             )
         .then(game => {
             if(game === null){
                 res.status(404).send({Error: 'game does not exist'});
             }
-            
-            if(game.user === req.userData.userId){
+            else{
                 res.status(200).send({message: 'developer is deleted' })
             }
         }).catch(next);
