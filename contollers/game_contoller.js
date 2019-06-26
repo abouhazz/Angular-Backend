@@ -43,6 +43,7 @@ module.exports = {
     deleteGame(req, res, next){
         Game.findOne({_id: req.params.gameid,user: req.userData.userId})
         .then(game => {
+            game.delete()
             if(game === null){
                 res.status(404).send({Error: 'game does not exist or the user is non-autherized'});
             }
