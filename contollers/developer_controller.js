@@ -64,14 +64,12 @@ module.exports = {
             )
             
         .then(game => {
-            game.delete()
+            
             if(game === null){
                 res.status(404).send({Error: 'game does not exist'});
             }
             
-            if(game.user === req.userData.userId){
-                res.status(200).send({message: 'developer is deleted' })
-            }
+            
         }).catch(next);
     },
 
