@@ -61,7 +61,7 @@ module.exports = {
             )
         .then(game => {
             if(game === null){
-                game.delete()
+                
                 res.status(404).send({Error: 'game does not exist'});
             }
             else{
