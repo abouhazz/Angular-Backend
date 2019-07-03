@@ -39,7 +39,7 @@ module.exports = (app)=>{
     app.post('/api/games', token, GameController.createGame)
     app.get('/api/games',  GameController.getAllGames)
     app.get('/api/games/:gameid',  GameController.getGameById)
-    app.put('/api/games/:gameid', token, GameController.editGame)
+    app.put('/api/games/:gameid', GameController.editGame)
     app.delete('/api/games/:gameid',  GameController.deleteGame)
 
     app.post('/api/games/:gameid/developers',  DeveloperController.createDeveloper)

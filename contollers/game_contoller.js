@@ -27,7 +27,7 @@ module.exports = {
     },
 
     editGame(req, res, next){
-        Game.findOne({_id: req.params.gameid,user: req.userData.userId})
+        Game.findOne({_id: req.params.gameid})
         .then(game => {
             game.name= req.body.name, game.description =req.body.description,game.releasedate= req.body.releasedate, game.platform= req.body.platform
             if(game === null){
