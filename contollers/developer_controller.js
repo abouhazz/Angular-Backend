@@ -59,12 +59,12 @@ module.exports = {
     },
 
     deleteDeveloper(req, res, next){
-        Game.deleteOne({_id: req.params.gameid},
+        Game.updateOne({_id: req.params.gameid, user: req.userData.userId},
             {$pull: {developers: {_id: req.params.developerid}}}
             )
             
         .then(game => {
-            
+            game.delete()
             if(game === null){
                 res.status(404).send({Error: 'game does not exist'});
             }
