@@ -59,7 +59,7 @@ module.exports = {
     },
 
     deleteDeveloper(req, res, next){
-        Game.updateOne({_id: req.params.gameid, user: req.userData.userId},
+        Game.deleteOne({_id: req.params.gameid, user: req.userData.userId},
             {$pull: {developers: {_id: req.params.developerid}}}
             )
             
