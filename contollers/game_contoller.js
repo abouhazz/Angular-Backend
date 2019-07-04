@@ -27,14 +27,14 @@ module.exports = {
     },
 
     editGame(req, res, next){
-        Game.findOne({_id: req.params.gameid})
+        Game.findOne({_id: req.params.gameid,user: req.userData.userId})
         .then(game => {
             game.name= req.body.name, game.description =req.body.description,game.releasedate= req.body.releasedate, game.platform= req.body.platform
             if(game === null){
                 res.status(404).send({Error: 'game does not exist or the user is non-autherized'});
             }
             else{
-                game.save()
+                
                 res.send(game);
             }
         }).catch(next);

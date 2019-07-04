@@ -6,4 +6,5 @@ const DeveloperSchema = new Schema({
     
 });
 
+
 module.exports = DeveloperSchema;

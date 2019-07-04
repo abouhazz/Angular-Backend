@@ -37,7 +37,7 @@ module.exports = {
                         developer = loop;
                     }
                 });
-                res.send(developer);
+                res.status(200).send(developer);
             }
         }).catch(next);
     },
@@ -53,7 +53,7 @@ module.exports = {
             
             else{
                 
-                res.send(game);
+                res.status(200).send(game);
             }
         }).catch(next);
     },

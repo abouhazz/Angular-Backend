@@ -66,39 +66,65 @@ describe('Game controller', () => {
             });
         });
         
-    it('PUT to api/developers edits a developer', done => {
-            const test = new User({ email : 'testende@hotmail.com',password : 'test', name:'test'});
-            const game = new Game({ name: 'testGame', description: 'testDescription'  , platform: 'PS4',releasedate: "2015-03-25", user: test._id});
-                                        
-            Promise.all([test.save(),game.save()])
-            .then(() => {
+    it('PUT to api/games edits a specific game', (done) => {
+        request(app)
+        .post('/api/register')
+        .send({ email : 'testende@hotmail.com',password : 'test', name:'test'})
+        .then(()=>{
+            request(app)
+            .post('/api/login')
+            .send({ email : 'testende@hotmail.com',password : 'test' })
+            .then((response)=>{
+                const token = response.body.token;
                 request(app)
-                        .put('/api/games/' + game._id)
-                        .send({name: 'izan', description: 'testDescription'  , platform: 'PS4',releasedate: "2015-03-25",user: test._id })
-                        .end((err, response) => {
-                            console.log(response.body)
-                            assert(response.status === 200);
-                            done();
-                         });
-                    });
-                });
+                .post('/api/games')
+                .set('Authorization', 'Bearer ' + token)
+                .send({name: 'testGame', description: 'testDescription', platform: 'PS4', releasedate: "2015-03-25"})    
+                .then((gamedate)=>{
+                    const data = gamedate.body._id;
+                    request(app)
+                    .put('/api/games/' + data)
+                    .set('Authorization', 'Bearer ' + token)
+                    .send({name: 'tesssss', description: 'testDescription', platform: 'PS4', releasedate: "2015-03-25"})
+                    .end((err, response) => {
+                        assert(response.body.name === 'tesssss');
+                        done();
+                    })
+                })
                 
-
-    // it('DELETE to api/games deletes a specific game', done => {
-    //     const game = new Game({ name: 'testGame', description: 'testDescription', platform: 'PS4', releasedate: "2015-03-25" });
-        
-    //     Promise.all([game.save()])
-    //     .then(() => {
-    //         request(app)
-    //             .delete('/api/games/' + game._id)
-    //             .end((err, response) => {
-    //                 assert(response.status === 200);
-    //                 done();
-    //             });
-    //         });
-
-
-    //     });
-    
+            })
+        })
     });
+
+    it('DELETE to api/games deletes a specific game', done => {
+        request(app)
+        .post('/api/register')
+        .send({ email : 'testende@hotmail.com',password : 'test', name:'test'})
+        .then(()=>{
+            request(app)
+            .post('/api/login')
+            .send({ email : 'testende@hotmail.com',password : 'test' })
+            .then((response)=>{
+                const token = response.body.token;
+                request(app)
+                .post('/api/games')
+                .set('Authorization', 'Bearer ' + token)
+                .send({name: 'testGame', description: 'testDescription', platform: 'PS4', releasedate: "2015-03-25"})    
+                .then((gamedate)=>{
+                    const data = gamedate.body._id;
+                    request(app)
+                    .delete('/api/games/' + data)
+                    .set('Authorization', 'Bearer ' + token)
+                    .end((err, response) => {
+                        assert(response.status === 200);
+                        done();
+                    })
+                })
+                
+            })
+        })
+
+    });
+    
+});
 

@@ -10,7 +10,7 @@ const GameSchema = new Schema({
     releasedate: {type: Date, required: true},
     developers: [DeveloperSchema],
     charachters: [CharachterSchema],
-    user: {type: Schema.Types.ObjectId, ref: 'user', required: true},
+    user: {type: Schema.Types.ObjectId, ref: 'user'},
 });
 
 const Game = mongoose.model('game', GameSchema);
